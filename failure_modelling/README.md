@@ -10,7 +10,7 @@ Project Organization
     ├── README.md          <- The top-level README for developers using this project.
     |
     ├── data      
-    │   ├── processed      <- The final, canonical data sets for modeling.
+    │   ├── processed      <- The final, canonical data for modeling.
     │   └── raw            <- The original, immutable data dump.
     |
     ├── trained_models     <- Trained and serialized models, model predictions, or model summaries.
@@ -38,7 +38,7 @@ Project Organization
     │   └── eda            <- Scripts to create exploratory and results oriented visualizations.
     │       └── eda.py
     │
-    └── tests              <- Scipts to perform unit tests.
+    └── tests              <- Scripts to perform unit tests.
 
 
 
