@@ -174,8 +174,8 @@ plt.show()
 
 f_drive = data_by_drive.get_group("Z3051NNA")
 
-
-# whisker plots for ranges of smart stats
+##################################### Whisker plots for all columns with emptiness percent less than 75%################
+# whisker plots for ranges of smart stats using 15 days ( 1 million ) rows of data
 sns.set(style="ticks", palette="pastel")
 sns.boxplot(x="smart_1_raw", y = "failure",
             hue="failure", palette=["m", "g"],
@@ -363,16 +363,91 @@ sns.boxplot(x="smart_242_raw", y = "failure",
 sns.despine(offset=10, trim=True)
 plt.show()
 
+##################################### Violin plots for few important columns ###########################################
+# using same data as for whisker plots of 15 days ( 1 million ) rows of data
+sns.set(style="ticks", palette="pastel")
+sns.violinplot(x="smart_9_raw", y = "failure",
+            hue="failure", palette=["m", "g"],
+            data=yr_2017_Q1_data)
+plt.show()
 
+sns.set(style="ticks", palette="pastel")
+sns.violinplot(x="smart_187_raw", y = "failure",
+            hue="failure", palette=["m", "g"],
+            data=yr_2017_Q1_data)
+plt.show()
+
+sns.set(style="ticks", palette="pastel")
+sns.violinplot(x="smart_194_raw", y = "failure",
+            hue="failure", palette=["m", "g"],
+            data=yr_2017_Q1_data)
+plt.show()
+
+sns.set(style="ticks", palette="pastel")
+sns.violinplot(x="smart_197_raw", y = "failure",
+            hue="failure", palette=["m", "g"],
+            data=yr_2017_Q1_data)
+plt.show()
+
+sns.set(style="ticks", palette="pastel")
+sns.violinplot(x="smart_198_raw", y = "failure",
+            hue="failure", palette=["m", "g"],
+            data=yr_2017_Q1_data)
+plt.show()
+
+sns.set(style="ticks", palette="pastel")
+sns.violinplot(x="smart_241_raw", y = "failure",
+            hue="failure", palette=["m", "g"],
+            data=yr_2017_Q1_data)
+plt.show()
+
+sns.set(style="ticks", palette="pastel")
+sns.violinplot(x="smart_190_raw", y = "failure",
+            hue="failure", palette=["m", "g"],
+            data=yr_2017_Q1_data)
+sns.despine(offset=10, trim=True)
+plt.show()
+
+# this below dataframe of obs_failed_drives is made using data of whole Q1 data of 3 months, from which data of 14 drives
+# were grouped to form it.
 failed_drive_list = list(failure_instances["serial_number"])
 # we will start our dataframe with 21st drive which failed on 7th day of jan month
 obs_failed_drives = pandas.DataFrame() # this is to observe behaviour of failed drives for 6 days before failure
 day_before_failure = ["Day1", "Day2", "Day3", "Day4", "Day5" ,"Day6", "Day7"] # here on day7 the drive failed
 for i in range(21, 35):
     dd = data_by_drive.get_group(failed_drive_list[i])[-7:]
-    dd['days_before_fail'] = day_before_failure
+    dd['days'] = day_before_failure
     obs_failed_drives = obs_failed_drives.append(dd)
     #obs_failed_drives = obs_failed_drives.append(data_by_drive.get_group(failed_drive_list[i])[-7:])
+
+#
+
+# we can plot for Smart 184, 187, 188, 189 together and confirm that whether they should be considered relevant
+sns.set(style="ticks", palette="pastel")
+sns.boxplot(y="smart_184_raw", x = "days",
+            hue="failure", palette=["m", "g"],
+            data=obs_failed_drives)
+sns.despine(trim=True)
+plt.show()
+sns.set(style="ticks", palette="pastel")
+sns.boxplot(y="smart_187_raw", x = "days",
+            hue="failure", palette=["m", "g"],
+            data=obs_failed_drives)
+sns.despine(trim=True)
+plt.show()
+sns.set(style="ticks", palette="pastel")
+sns.boxplot(y="smart_188_raw", x = "days",
+            hue="failure", palette=["m", "g"],
+            data=obs_failed_drives)
+sns.despine(trim=True)
+plt.show()
+sns.set(style="ticks", palette="pastel")
+sns.boxplot(y="smart_188_raw", x = "days",
+            hue="failure", palette=["m", "g"],
+            data=obs_failed_drives)
+sns.despine(trim=True)
+plt.show()
+# we can observe from the plots that we can ignore, Smart 184, 188, 189. But keep Smart 184 as relevant
 
 sns.set(style="ticks", palette="pastel")
 sns.boxplot(y="smart_190_raw", x = "days",
@@ -380,14 +455,146 @@ sns.boxplot(y="smart_190_raw", x = "days",
             data=obs_failed_drives)
 sns.despine(offset=10, trim=True)
 plt.show()
+sns.set(style="ticks", palette="pastel")
+sns.boxplot(y="smart_191_raw", x = "days",
+            hue="failure", palette=["m", "g"],
+            data=obs_failed_drives)
+sns.despine(trim=True)
+plt.show()
 
 sns.set(style="ticks", palette="pastel")
-sns.boxplot(y="smart_193_raw", x = "days",
+sns.boxplot(y="smart_192_raw", x = "days",
+            hue="failure", palette=["m", "g"],
+            data=obs_failed_drives)
+sns.despine()
+plt.show()
+
+sns.set(style="ticks", palette="pastel")
+sns.boxplot(y="smart_193_raw", x="days",
             hue="failure", palette=["m", "g"],
             data=obs_failed_drives)
 sns.despine(offset=10, trim=True)
 plt.show()
-axs: Axes
+
+obs_failed_drives["smart_194_raw"] = obs_failed_drives["smart_194_raw"].astype(float)
+sns.set(style="ticks", palette="pastel")
+sns.boxplot(y="smart_194_raw", x = "days",
+            hue="failure", palette=["m", "g"],
+            data=obs_failed_drives)
+sns.despine(trim=True)
+plt.show()
+
+obs_failed_drives["smart_197_raw"] = obs_failed_drives["smart_197_raw"].astype(float)
+sns.set(style="ticks", palette="pastel")
+sns.boxplot(y="smart_197_raw", x = "days",
+            hue="failure", palette=["m", "g"],
+            data=obs_failed_drives)
+sns.despine(trim=True)
+plt.show()
+
+obs_failed_drives["smart_198_raw"] = obs_failed_drives["smart_198_raw"].astype(float)
+sns.set(style="ticks", palette="pastel")
+sns.boxplot(y="smart_198_raw", x = "days",
+            hue="failure", palette=["m", "g"],
+            data=obs_failed_drives)
+sns.despine(trim=True)
+plt.show()
+
+obs_failed_drives["smart_199_raw"] = obs_failed_drives["smart_199_raw"].astype(float)
+sns.set(style="ticks", palette="pastel")
+sns.boxplot(y="smart_199_raw", x = "days",
+            hue="failure", palette=["m", "g"],
+            data=obs_failed_drives)
+sns.despine(trim=True)
+plt.show()
+
+# now lets plot smart stats 240, 241 and 242
+sns.set(style="ticks", palette="pastel")
+sns.boxplot(y="smart_240_raw", x = "days",
+            hue="failure", palette=["m", "g"],
+            data=obs_failed_drives)
+sns.despine(trim=True)
+plt.show()
+sns.set(style="ticks", palette="pastel")
+sns.boxplot(y="smart_241_raw", x = "days",
+            hue="failure", palette=["m", "g"],
+            data=obs_failed_drives)
+sns.despine(trim=True)
+plt.show()
+sns.set(style="ticks", palette="pastel")
+sns.boxplot(y="smart_242_raw", x = "days",
+            hue="failure", palette=["m", "g"],
+            data=obs_failed_drives)
+sns.despine(trim=True)
+plt.show()
 
 
 
+# plotting various types of capacity types
+yr_2017_Q1_data["capacity_bytes"].unique()
+yr_2017_Q1_data["capacity_bytes"].value_counts()
+labels = ["3.63TB", "7.28TB", "2.73TB", "5.46TB", "0.45TB","0.15TB","0.23TB", "0.9TB","0.29TB", "4.54TB","1.36TB","1.82TB" , "0.23TB"]
+sizes = list(yr_2017_Q1_data["capacity_bytes"].value_counts())
+fig, axs = plt.subplots(1,2)
+wedges, _, pcts = axs[0].pie(sizes, autopct='%1.1f%%', textprops=dict(visible=False))
+axs[0].axis('equal', colors=labels)
+axs[0].margins(1)
+axs[1].legend(wedges,
+list(map(lambda x: f"{x[0]} {x[1].get_text()}", zip(labels, pcts))), title='Drive data by Capacity',
+        loc="upper right")
+axs[1].axis("off")
+plt.show()
+
+# plotting various kinds of models among drive data
+
+yr_2017_Q1_data["model"].unique()
+fig, axs = plt.subplots(1,2)
+sizes = list(yr_2017_Q1_data["model"].value_counts())
+labels = list(yr_2017_Q1_data["model"].value_counts().keys())
+wedges, _, pcts = axs[0].pie(sizes, autopct='%1.1f%%', textprops=dict(visible=False))
+axs[0].axis('equal', colors=labels)
+axs[0].margins(1)
+axs[1].legend(wedges,
+list(map(lambda x: f"{x[0]} {x[1].get_text()}", zip(labels, pcts))), title='Models',
+        loc="upper right")
+axs[1].axis("off")
+plt.show()
+
+
+
+
+
+"""
+The smart stats which have emptiness percentage to be less 30% are -
+Smart 1 
+Smart 3
+Smart 4
+Smart 5
+Smart 7
+Smart 9
+Smart 10
+Smart 12
+Smart 192
+Smart 193
+Smart 194
+Smart 197
+Smart 198
+Smart 199
+These 14 are the columns which can be used for baseline model
+
+Among the 36 - 40% missing values lie below columns which can be considered for carefull imputations : 
+
+
+Smart 184
+Smart 187
+Smart 188
+Smart 189
+Smart 190
+Smart 191 
+Smart 240
+Smart 241
+Smart 242
+
+
+Smart 183 is not that helpful because having 49% missing it has most values as outliers.
+"""
