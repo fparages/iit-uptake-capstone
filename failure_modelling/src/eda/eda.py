@@ -447,7 +447,7 @@ sns.boxplot(y="smart_188_raw", x = "days",
             data=obs_failed_drives)
 sns.despine(trim=True)
 plt.show()
-# we can observe from the plots that we can ignore, Smart 184, 188, 189. But keep Smart 184 as relevant
+# we can observe from the plots that we can ignore, Smart 184, 188, 189. But keep Smart 187 as relevant
 
 sns.set(style="ticks", palette="pastel")
 sns.boxplot(y="smart_190_raw", x = "days",
