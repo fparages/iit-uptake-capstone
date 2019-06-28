@@ -560,6 +560,11 @@ list(map(lambda x: f"{x[0]} {x[1].get_text()}", zip(labels, pcts))), title='Mode
 axs[1].axis("off")
 plt.show()
 
+'''
+Kindly find all the plots obtained and conclusions derived at below google doc and feel free to comment
+
+https://docs.google.com/document/d/1Rh8s-RXt37DN16zyKCV8B-QHzYn1Sl02IYkMLdWsfBc/edit
+'''
 
 
 
