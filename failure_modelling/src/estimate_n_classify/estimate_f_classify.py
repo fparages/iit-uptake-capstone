@@ -55,28 +55,53 @@ x_estimates = autoencoder.predict(xsamp)
 x_est_df = pandas.DataFrame(x_estimates)
 
 ################################## Ploting actual and estimated features as scatter plots ##############################
+fig, axes = plt.subplots(2, 2)
 
-
-plt.figure()
-axs: Axes = plt.gca()
-axs.set_xlabel("Actual Smart 1 Values")
+#plt.figure()
+axs: Axes = axes[0][0]
+axs.set_xlabel("Actual Smart 1")
 axs.set_ylabel("Estimated Smart 1 Values")
 axs.scatter(xsamp["smart_1_raw"][ysamp == 1], x_est_df[1][ysamp == 1], label="Failure", alpha=0.025)
 axs.scatter(xsamp["smart_1_raw"][ysamp == 0], x_est_df[1][ysamp == 0], label="Non-Failure", alpha=0.025)
 axs.legend()
-plt.show()
+#plt.show()
 
-plt.figure()
-axs: Axes = plt.gca()
+#plt.figure()
+axs: Axes = axes[0][1]
 axs.set_xlabel("Actual Smart 3 Values")
 axs.set_ylabel("Estimated Smart 3 Values")
 axs.scatter(xsamp["smart_3_raw"][ysamp == 1], x_est_df[1][ysamp == 1], label="Failure", alpha=0.025)
 axs.scatter(xsamp["smart_3_raw"][ysamp == 0], x_est_df[1][ysamp == 0], label="Non-Failure", alpha=0.025)
 axs.legend()
+#plt.show()
+#plt.figure()
+axs: Axes = axes[1][0]
+axs.set_xlabel("Actual Smart 192 Values")
+axs.set_ylabel("Estimated Smart 192 Values")
+axs.scatter(xsamp["smart_192_raw"][ysamp == 1], x_est_df[1][ysamp == 1], label="Failure", alpha=0.025)
+axs.scatter(xsamp["smart_192_raw"][ysamp == 0], x_est_df[1][ysamp == 0], label="Non-Failure", alpha=0.025)
+axs.legend()
+# plt.show()
+# plt.figure()
+axs: Axes = axes[1][1]
+axs.set_xlabel("Actual Smart 197 Values")
+axs.set_ylabel("Estimated Smart 197 Values")
+axs.scatter(xsamp["smart_197_raw"][ysamp == 1], x_est_df[1][ysamp == 1], label="Failure", alpha=0.025)
+axs.scatter(xsamp["smart_197_raw"][ysamp == 0], x_est_df[1][ysamp == 0], label="Non-Failure", alpha=0.025)
+axs.legend()
 plt.show()
 
-plt.figure()
-axs: Axes = plt.gca()
+fig, axes = plt.subplots(2, 2)
+axs: Axes = axes[0][0]
+axs.set_xlabel("Actual Smart 198 Values")
+axs.set_ylabel("Estimated Smart 198 Values")
+axs.scatter(xsamp["smart_198_raw"][ysamp == 1], x_est_df[1][ysamp == 1], label="Failure", alpha=0.025)
+axs.scatter(xsamp["smart_198_raw"][ysamp == 0], x_est_df[1][ysamp == 0], label="Non-Failure", alpha=0.025)
+axs.legend()
+#plt.show()
+
+# plt.figure()
+axs: Axes = axes[0][1]
 axs.set_xlabel("Actual Smart 9 Values")
 axs.set_ylabel("Estimated Smart 9 Values")
 axs.scatter(xsamp["smart_9_raw"][ysamp == 1], x_est_df[1][ysamp == 1], label="Failure", alpha=0.025)
@@ -84,14 +109,6 @@ axs.scatter(xsamp["smart_9_raw"][ysamp == 0], x_est_df[1][ysamp == 0], label="No
 axs.legend()
 plt.show()
 
-plt.figure()
-axs: Axes = plt.gca()
-axs.set_xlabel("Actual Smart 192 Values")
-axs.set_ylabel("Estimated Smart 192 Values")
-axs.scatter(xsamp["smart_192_raw"][ysamp == 1], x_est_df[1][ysamp == 1], label="Failure", alpha=0.025)
-axs.scatter(xsamp["smart_192_raw"][ysamp == 0], x_est_df[1][ysamp == 0], label="Non-Failure", alpha=0.025)
-axs.legend()
-plt.show()
 
 plt.figure()
 axs: Axes = plt.gca()
@@ -102,23 +119,7 @@ axs.scatter(xsamp["smart_194_raw"][ysamp == 0], x_est_df[1][ysamp == 0], label="
 axs.legend()
 plt.show()
 
-plt.figure()
-axs: Axes = plt.gca()
-axs.set_xlabel("Actual Smart 197 Values")
-axs.set_ylabel("Estimated Smart 197 Values")
-axs.scatter(xsamp["smart_197_raw"][ysamp == 1], x_est_df[1][ysamp == 1], label="Failure", alpha=0.025)
-axs.scatter(xsamp["smart_197_raw"][ysamp == 0], x_est_df[1][ysamp == 0], label="Non-Failure", alpha=0.025)
-axs.legend()
-plt.show()
 
-plt.figure()
-axs: Axes = plt.gca()
-axs.set_xlabel("Actual Smart 198 Values")
-axs.set_ylabel("Estimated Smart 198 Values")
-axs.scatter(xsamp["smart_198_raw"][ysamp == 1], x_est_df[1][ysamp == 1], label="Failure", alpha=0.025)
-axs.scatter(xsamp["smart_198_raw"][ysamp == 0], x_est_df[1][ysamp == 0], label="Non-Failure", alpha=0.025)
-axs.legend()
-plt.show()
 
 ################################## Ploting cosine similarity of features as vectors, using density plot ################
 cos_sim = []
@@ -205,32 +206,32 @@ plt.legend()
 plt.show()
 
 ################################## Random Forest without feeding  residuals ############################################
-X_train, X_test, y_train, y_test = train_test_split(df_with_residuals, ysamp, test_size=0.2, random_state=20)
+X_train, X_test, y_train, y_test = train_test_split(df_with_residuals, ysamp, train_size=0.8, test_size=0.2,
+                                                    random_state=20)
 y_train = y_train.astype('int64')
 y_train = y_train.astype('category')
 y_test = y_test.astype('int64')
 y_test = y_test.astype('category')
-random_forest_model = RandomForestClassifier(random_state= 20, max_depth=7) # instantiate model
-random_forest_model.fit(X_train.iloc[:, :7], y_train) # fitting the model on training data
-predictions = random_forest_model.predict(X_test.iloc[:, :7])
-print("Accuracy:",random_forest_model.score(X_test.iloc[:, :7], y_test))
-print("Accuracy:",random_forest_model.score(X_train.iloc[:, :7], y_train))
+random_forest_model_w_res = RandomForestClassifier(random_state= 20, max_depth=7, n_estimators=4) # instantiate model
+random_forest_model_w_res.fit(X_train.iloc[:, :7], y_train) # fitting the model on training data
+predictions_w_res = random_forest_model_w_res.predict(X_test.iloc[:, :7])
+print("Accuracy:",random_forest_model_w_res.score(X_test.iloc[:, :7], y_test))
+print("Accuracy:",random_forest_model_w_res.score(X_train.iloc[:, :7], y_train))
 # Visualise classical Confusion Matrix
-CM = confusion_matrix(y_test, predictions)
+CM = confusion_matrix(y_test, predictions_w_res)
 print(CM)
-fpr, tpr, th = roc_curve(y_test, random_forest_model.predict_proba(X_test.iloc[:, :7])[:, 1])
+fpr, tpr, th = roc_curve(y_test, random_forest_model_w_res.predict_proba(X_test.iloc[:, :7])[:, 1])
 plt.figure()
 axs = plt.gca()
-axs.plot(fpr, tpr, 'b--', label = "Random Forest")
-plt.xlabel("False Positive Rate")
-plt.ylabel("True Positive Rate")
-plt.title(" ROC curve for Random Forest without residuals")
-plt.plot([0.0,1.0],[0.0,1.0], 'r--', label = "No skill curve")
-plt.legend()
-plt.show()
+axs.plot(fpr, tpr, 'b--', label = "Random Forest without residuals")
+axs.set_xlabel("False Positive Rate")
+axs.set_ylabel("True Positive Rate")
+axs.plot([0.0,1.0],[0.0,1.0], 'r--', label = "No skill curve")
+
+
 
 ################################## Random Forest after feeding  residuals ##############################################
-random_forest_model = RandomForestClassifier(random_state= 20, max_depth=7) # instantiate model
+random_forest_model = RandomForestClassifier(random_state= 20, max_depth=9, n_estimators=8)  # instantiate model
 random_forest_model.fit(X_train, y_train) # fitting the model on training data
 
 predictions = random_forest_model.predict(X_test)
@@ -247,17 +248,16 @@ print(CM)
 # plt.show()
 
 fpr, tpr, th = roc_curve(y_test, random_forest_model.predict_proba(X_test)[:, 1])
-plt.figure()
 axs = plt.gca()
-axs.plot(fpr, tpr, 'b--', label = "Random Forest")
-plt.xlabel("False Positive Rate")
-plt.ylabel("True Positive Rate")
-plt.title(" ROC curve for Random Forest after feeding residuals")
-plt.plot([0.0,1.0],[0.0,1.0], 'r--', label = "No skill curve")
-plt.legend()
+axs.plot(fpr, tpr, 'g--', label="Random Forest with residuals")
+axs.set_title("ROC curve")
+axs.legend()
 plt.show()
 # Conclusion : Increase in recall with little decrease i precision. Moreover,  missed alarms have decreased which is
 # very important.
+
+fig, axes = plt.subplots(2, 1)
+axes = axes.flatten()
 
 fimp = pandas.DataFrame()
 cols = X_train.columns[:7].tolist()
@@ -272,10 +272,26 @@ feature_mappings = ['smart_1', 'smart_3', 'smart_9', 'smart_192',
 feature_mappings = pandas.Series(feature_mappings)
 fimp['ncol'] = feature_mappings[fimp.index]
 
-axs = sns.barplot('imp', 'ncol', data=fimp)
-axs.set_xlabel("Feature Importance")
-axs.set_ylabel("Columns")
-axs.set_title("Random forest with residuals")
+sns.barplot('imp', 'ncol', data=fimp, ax=axes[0])
+axes[0].set_xlabel("Feature Importance with residuals")
+axes[0].set_ylabel("Columns")
+#axs.set_title("Random forest with residuals")
+
+fimp = pandas.DataFrame()
+cols = X_train.columns[:7].tolist()
+feature_mappings = ['smart_1', 'smart_3', 'smart_9', 'smart_192',
+                    'smart_194', 'smart_197', 'smart_198']
+fimp['col'] = feature_mappings
+fimp['imp'] = random_forest_model_w_res.feature_importances_
+fimp.sort_values('imp', ascending=False, inplace=True)
+
+
+
+sns.barplot('imp', 'col', data=fimp, ax=axes[1])
+axes[1].set_xlabel("Feature Importance without residuals")
+axes[1].set_ylabel("Columns")
+
+# fig.suptitle("Feature Importances with (up) and without residuals (down)")
 plt.show()
 
 # Kindly find all the relevant and final plots with respect to autoencoders - https://docs.google.com/document/d/1aHOepvTe56HxDjetrt9pPZ6EwtKqed8LwTb_DjLGrD0/edit#
