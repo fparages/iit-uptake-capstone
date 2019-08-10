@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../Diagnosing_Heart_Disease/.idea/Diagnosing_Heart_Disease.iml" filepath="$PROJECT_DIR$/../Diagnosing_Heart_Disease/.idea/Diagnosing_Heart_Disease.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Machine-Learning/.idea/Machine-Learning.iml" filepath="$PROJECT_DIR$/../Machine-Learning/.idea/Machine-Learning.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/iit-uptake-capstone.iml" filepath="$PROJECT_DIR$/.idea/iit-uptake-capstone.iml" />
+    </modules>
+  </component>
+</project>

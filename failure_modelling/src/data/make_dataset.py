@@ -1,30 +1,13 @@
-# -*- coding: utf-8 -*-
-import click
-import logging
+import pandas
 from pathlib import Path
-from dotenv import find_dotenv, load_dotenv
 
+###################################### Function to read data ###########################################################
+def read_data(start_date,uptill_date ):
+    p = Path('/Volumes/Seagate Backup Plus Drive/Uptake_DS_practicum_Backblaze/2017/data_Q1_2017')
 
-@click.command()
-@click.argument('input_filepath', type=click.Path(exists=True))
-@click.argument('output_filepath', type=click.Path())
-def main(input_filepath, output_filepath):
-    """ Runs data processing scripts to turn raw data from (../raw) into
-        cleaned data ready to be analyzed (saved in ../processed).
-    """
-    logger = logging.getLogger(__name__)
-    logger.info('making final data set from raw data')
-
-
-if __name__ == '__main__':
-    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    logging.basicConfig(level=logging.INFO, format=log_fmt)
-
-    # not used in this stub but often useful for finding various files
-    project_dir = Path(__file__).resolve().parents[2]
-
-    # find .env automagically by walking up directories until it's found, then
-    # load up the .env entries as environment variables
-    load_dotenv(find_dotenv())
-
-    main()
+    yr_2017_Q1_data = pandas.DataFrame()
+    for child in p.iterdir():
+        if (str(child) <= (str(p) + uptill_date)):
+            print(child)
+            yr_2017_Q1_data = pandas.concat([yr_2017_Q1_data, pandas.read_csv(str(child))])
+    return yr_2017_Q1_data

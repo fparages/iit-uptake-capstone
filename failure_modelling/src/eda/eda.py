@@ -1,23 +1,15 @@
 import pandas
-from pathlib import Path
 import seaborn as sns
 import matplotlib.pyplot as plt
 from pandas.core.groupby import GroupBy, DataFrameGroupBy
 from matplotlib.axes import Axes
-import pyarrow.feather as feather
+from ..data.make_dataset import read_data
 
 ###################################### Reading data  for 2017 and 2015 Q3, Q4  #########################################
-p = Path('/Volumes/Seagate Backup Plus Drive/Uptake_DS_practicum_Backblaze/2017/data_Q1_2017')
-start_date  = "/2017-01-01.csv"
+
+start_date = "/2017-01-01.csv"
 uptill_date = "/2017-03-31.csv"
-
-yr_2017_Q1_data = pandas.DataFrame()
-
-for child in p.iterdir():
-    if(str(child) <= (str(p) + uptill_date)):
-        print(child)
-        yr_2017_Q1_data = pandas.concat([yr_2017_Q1_data, pandas.read_csv(str(child))])
-
+yr_2017_Q1_data = read_data(start_date, uptill_date)
 
 ###################################### Data Preprocessing for 2017 and 2015 Q3, Q4  ####################################
 print(yr_2017_Q1_data.columns)
